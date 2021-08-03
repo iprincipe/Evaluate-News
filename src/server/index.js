@@ -50,5 +50,20 @@ app.post('/', function (req,res){
 app.post('/callAPI', postAPIdata);
 
 function postAPIdata (req,res){
-	
+	/*
+    From Weather Journal...
+    Idea of what to do hopefully
+
+
+	let newData = req.body;
+	console.log(req.body);
+	let newEntry = {
+		temp: newData.temp,
+		date: newData.date,
+		feeling: newData.feeling
+	}
+	projectData = newEntry;
+
+	console.log(projectData);
+    */
 }
