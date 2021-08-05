@@ -1,6 +1,6 @@
 const baseURL = 'https://api.meaningcloud.com/sentiment-2.1?key=';
 let urlInput = '';
-const apiKey = '7d25b97d22b8555d82fc4dee54fce27e&of=json&url=<';
+const apiKey = 'e&of=json&url=<'; //dont show apiKey
 const endUrl = '>&lang=en"';
 
 function handleSubmit(event) {
