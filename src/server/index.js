@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const baseURL = 'https://api.meaningcloud.com/sentiment-2.1?key=';
+const apiKey = application_key + 'e&of=json&url=<';
 const endUrl = '>&lang=en"';
 
 console.log(__dirname)
@@ -41,7 +42,7 @@ app.get('/test', function (req, res) {
 
 
 app.post("/callAPI", async (req, res) => {
-  const meaningCloudUrl = baseURL + application_key + req.body + endUrl;
+  const meaningCloudUrl = baseURL + apiKey + req.body + endUrl;
   const resp = await fetch(meaningCloudUrl);
 
   try {
