@@ -32,11 +32,6 @@ app.listen(8080, function () {
   console.log('Example app listening on port 8080!')
 })
 
-app.get('/', function (req, res) {
-  // res.sendFile('dist/index.html')
-  res.sendFile(path.resolve('src/dist/views/index.html'))
-})
-
 //test connection with this
 //404 for some reason
 app.get('/test', function (req, res) {
