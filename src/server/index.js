@@ -9,7 +9,7 @@ var cors = require('cors');
 
 const dotenv = require('dotenv');
 dotenv.config();
-  
+
 const application_key = process.env.API_KEY;
 console.log(`Your API key is ${process.env.API_KEY}`);
 
@@ -22,48 +22,37 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-console.log(__dirname)
+const baseURL = 'https://api.meaningcloud.com/sentiment-2.1?key=';
+const endUrl = '>&lang=en"';
 
-app.get('/', function (req, res) {
-    // res.sendFile('dist/index.html')
-    res.sendFile(path.resolve('src/client/views/index.html'))
-})
+console.log(__dirname)
 
 // designates what port the app will listen to for incoming requests
 app.listen(8080, function () {
-    console.log('Example app listening on port 8080!')
+  console.log('Example app listening on port 8080!')
 })
 
+app.get('/', function (req, res) {
+  // res.sendFile('dist/index.html')
+  res.sendFile(path.resolve('src/dist/views/index.html'))
+})
+
+//test connection with this
+//404 for some reason
 app.get('/test', function (req, res) {
-    res.send(mockAPIResponse)
-})
-
-function sendData (req, res) {
-  res.send(projectData);
-};
-
-app.post('/', function (req,res){
-    res.sendFile('dist/index.html');
-})
-
-//POST 
-app.post('/callAPI', postAPIdata);
-
-function postAPIdata (req,res){
-	/*
-    From Weather Journal...
-    Idea of what to do hopefully
+  console.log("test");
+  res.send(mockAPIResponse)
+});
 
 
-	let newData = req.body;
-	console.log(req.body);
-	let newEntry = {
-		temp: newData.temp,
-		date: newData.date,
-		feeling: newData.feeling
-	}
-	projectData = newEntry;
+app.post("/callAPI", async (req, res) => {
+  const meaningCloudUrl = baseURL + application_key + req.body + endUrl;
+  const resp = await fetch(meaningCloudUrl);
 
-	console.log(projectData);
-    */
-}
+  try {
+    const data = await resp.json();
+    res.send(data);
+  } catch (err) {
+    console.log("error", err);
+  }
+});
