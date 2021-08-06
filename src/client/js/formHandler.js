@@ -1,7 +1,3 @@
-const baseURL = 'https://api.meaningcloud.com/sentiment-2.1?key=';
-let urlInput = '';
-const apiKey = 'e&of=json&url=<'; //dont show apiKey
-const endUrl = '>&lang=en"';
 
 function handleSubmit(event) {
     event.preventDefault();
@@ -15,8 +11,8 @@ function handleSubmit(event) {
         console.log("::: Form Submitted :::");
         postData("http://localhost:8080/callAPI", formText)
         
-        .then(function () {
-            updateUI();
+        .then(function (result) {
+            updateUI(result);
         });
     } else{
         console.log("error: Invalid Url");
@@ -28,9 +24,9 @@ const postData = async (url, data) => {
       method: "POST",
       credentials: "same-origin",
       headers: {
-        "Content-Type": "application/json", "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json","Access-Control-Allow-Origin": "*",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({data}),
     });
     try {
       const res = await response.json();
@@ -40,16 +36,16 @@ const postData = async (url, data) => {
     }
   };
 
-const updateUI = async () => {
+const updateUI = async (result) => {
     //const request = await fetch('/all');
-    console.log('update');
+    console.log('update ====> ', result);
     try {
-        //Fill elements with weather data to be displayed
-        const allData = await request.json();
-        document.getElementById('subjectivity').innerHTML = allData.subjectivity;
-        document.getElementById('polarity').innerHTML = allData.polarity;
-        document.getElementById('confidence').innerHTML = allData.confidence;
-        document.getElementById('irony').innerHTML = allData.irony;
+        //Fill elements with  data to be displayed
+        const allData = result;
+        document.getElementById('subjectivity').innerHTML = "subjectivity: " + allData.subjectivity;
+        document.getElementById('polarity').innerHTML = "polarity: " + allData.polarity;
+        document.getElementById('confidence').innerHTML = "confidence: " + allData.confidence;
+        document.getElementById('irony').innerHTML = "irony: " + allData.irony;
 
     } catch (error) {
         console.log("error", error);

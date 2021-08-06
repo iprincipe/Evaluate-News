@@ -1,7 +1,8 @@
-var path = require('path')
+var path = require('path');
 
-const express = require('express')
-const mockAPIResponse = require('./mockAPI.js')
+const fetch = require('node-fetch');
+const express = require('express');
+const mockAPIResponse = require('./mockAPI.js');
 
 const bodyParser = require('body-parser');
 
@@ -13,9 +14,9 @@ dotenv.config();
 const application_key = process.env.API_KEY;
 console.log(`Your API key is ${process.env.API_KEY}`);
 
-const app = express()
+const app = express();
 
-app.use(express.static('dist'))
+app.use(express.static('dist'));
 
 app.use(cors());
 
@@ -23,8 +24,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const baseURL = 'https://api.meaningcloud.com/sentiment-2.1?key=';
-const apiKey = application_key + 'e&of=json&url=<';
-const endUrl = '>&lang=en"';
+const apiKey = application_key + 'e&of=json&url=';
+const endUrl = '&lang=en"';
 
 console.log(__dirname)
 
@@ -32,6 +33,13 @@ console.log(__dirname)
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!')
 })
+
+
+app.get('/', function (req, res) {
+  // res.sendFile('src/client/views/index.html')
+  res.sendFile(path.resolve('src/client/views/index.html'))
+})
+
 
 //test connection with this
 //404 for some reason
@@ -42,13 +50,19 @@ app.get('/test', function (req, res) {
 
 
 app.post("/callAPI", async (req, res) => {
-  const meaningCloudUrl = baseURL + apiKey + req.body + endUrl;
-  const resp = await fetch(meaningCloudUrl);
-
+  const base = 'https://api.meaningcloud.com/sentiment-2.1';
+  const requestUrl = `${base}?key=${apiKey}&lang=auto&url=${req.body.data}`;
+  console.log('req.body ====+++> ', req.body)
+  console.log(requestUrl);
+  const result = await fetch(requestUrl)
   try {
-    const data = await resp.json();
-    res.send(data);
-  } catch (err) {
+    console.log(result)
+    const response = await result.json();
+    res.send(response)
+    console.log(response)
+  } catch (error) {
     console.log("error", err);
   }
+  // const meaningCloudUrl = baseURL + apiKey + req.body.data + endUrl;
 });
+
