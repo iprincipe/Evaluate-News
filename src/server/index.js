@@ -23,9 +23,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const baseURL = 'https://api.meaningcloud.com/sentiment-2.1?key=';
-const apiKey = application_key + 'e&of=json&url=';
-const endUrl = '&lang=en"';
+const apiKey = application_key;
 
 console.log(__dirname)
 
@@ -36,8 +34,7 @@ app.listen(8080, function () {
 
 
 app.get('/', function (req, res) {
-  // res.sendFile('src/client/views/index.html')
-  res.sendFile(path.resolve('src/client/views/index.html'))
+  res.sendFile(path.resolve('dist/index.html'))
 })
 
 

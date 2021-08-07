@@ -42,10 +42,10 @@ const updateUI = async (result) => {
     try {
         //Fill elements with  data to be displayed
         const allData = result;
-        document.getElementById('subjectivity').innerHTML = "subjectivity: " + allData.subjectivity;
-        document.getElementById('polarity').innerHTML = "polarity: " + allData.polarity;
-        document.getElementById('confidence').innerHTML = "confidence: " + allData.confidence;
-        document.getElementById('irony').innerHTML = "irony: " + allData.irony;
+        document.getElementById('subjectivity').innerHTML = "Subjectivity: " + allData.subjectivity;
+        document.getElementById('polarity').innerHTML = "Agreement: " + allData.agreement;
+        document.getElementById('confidence').innerHTML = "Confidence: " + allData.confidence;
+        document.getElementById('irony').innerHTML = "Irony: " + allData.irony;
 
     } catch (error) {
         console.log("error", error);
