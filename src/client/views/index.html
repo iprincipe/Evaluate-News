@@ -1,50 +1,65 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Test</title>
-        
-        <link rel="stylesheet" href="/styles/resets.css">
-        <link rel="stylesheet" href="/styles/base.css">
-        <link rel="stylesheet" href="/styles/header.css">
-        <link rel="stylesheet" href="/styles/form.css">
-        <link rel="stylesheet" href="/styles/footer.css">
 
-    </head>
+<head>
+    <meta charset="utf-8">
+    <title>Test</title>
 
-    <body>
+     
+    <rel="stylesheet" href="/styles/resets.css">
+    <rel="stylesheet" href="/styles/base.css">
+    <rel="stylesheet" href="/styles/header.css">
+    <rel="stylesheet" href="/styles/form.css">
+    <rel="stylesheet" href="/styles/footer.css">
+    
 
-        <header>
-            <div class="">
-                <h1>Natural Language Processing</h1>
-            </div>
-            <div class="">
-                <h2>Enter a URL and the machine will classify the information.</h2>
-            </div>
-        </header>
+</head>
 
-        <main>
-            <section>
-                <form class="" onsubmit="return handleSubmit(event)">
-                    <input id="name" type="text" name="input" value="" placeholder="Name">
-                    <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
-                </form>
-            </section>
+<body>
 
-            <section>
-                <strong>Form Results:</strong>
-                <div class="results" id="subjectivity"></div>
-                <div class="results" id="polarity"></div>
-                <div class="results" id="confidence"></div>
-                <div class="results" id="irony"></div>
-            </section>
-        </main>
+    <header>
+        <div class="">
+            <h1>Natural Language Processing</h1>
+        </div>
+        <div class="">
+            <h2>Enter a URL and the machine will classify the information.</h2>
+        </div>
+    </header>
 
-        <footer>
-            <p>This is a footer</p>
-        </footer>
+    <main>
+        <section>
+            <form class="" onsubmit="return handleSubmit(event)">
+                <input id="name" type="text" name="input" value="" placeholder="Name">
+                <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)"
+                    onsubmit="return Client.handleSubmit(event)">
+            </form>
+        </section>
 
-        
-        
-    </body>
+        <section>
+            <strong>Form Results:</strong>
+            <div class="results" id="subjectivity"></div>
+            <div class="results" id="polarity"></div>
+            <div class="results" id="confidence"></div>
+            <div class="results" id="irony"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>This is a footer</p>
+    </footer>
+    <script>
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                .then(reg => console.log('Service Worker: Registered!'))
+                .catch(err => console.log("err: " + err));
+            })
+        }
+    </script>
+
+
+</body>
+
 </html>
